@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOW Furniture - 프리미엄 가구 브랜드</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #c9a97d;
+            --light-color: #f5f5f5;
+            --dark-color: #121212;
+            --accent-color: #d4c8be;
+            --font-main: 'Noto Sans KR', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+        
+        body {
+            background-color: #fff;
+            color: var(--primary-color);
+            overflow-x: hidden;
+        }
+        
+        header {
+            background-color: #000;
+            padding: 20px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1920/1080') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            margin-top: 0;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #c9a97d; /* 골드 색상으로 변경 */
+        }
+        
+        .hero h1:last-of-type {
+            color: #ffffff; /* 두 번째 라인은 흰색으로 */
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            font-weight: 300;
+            color: #f5f5f5; /* 밝은 회색으로 변경 */
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 2px;
+            font-weight: 500;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .btn:hover {
+            background-color: #b6915e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 38px;
+            font-weight: 700;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .categories {
+            padding: 100px 5%;
+            background-color: #f9f9f9;
+        }
+        
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .category-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            margin: 0 15px;
+            padding: 8px 15px;
+            cursor: pointer;
+            color: var(--primary-color);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .category-btn::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s;
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            color: var(--secondary-color);
+        }
+        
+        .category-btn:hover::after,
+        .category-btn.active::after {
+            width: 80%;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product {
+            background-color: #fff;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-img {
+            height: 250px;
+            width: 100%;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        
+        .product-brand {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 2px;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .product-price {
+            color: var(--secondary-color);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .product-stock {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: var(--primary-color);
+        }
+        
+        .stock-icon {
+            color: #4CAF50;
+            margin-right: 5px;
+        }
+        
+        .low-stock {
+            color: #FFC107;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            overflow: auto;
+            transition: all 0.3s;
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            max-width: 500px;
+            border-radius: 0;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            animation: modalOpen 0.5s;
+        }
+        
+        @keyframes modalOpen {
+            from {opacity: 0; transform: translateY(-30px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .modal-header {
+            padding: 20px 30px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            position: relative;
+        }
+        
+        .modal-header h3 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #eee;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 0;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        
+        .modal-footer {
+            padding: 20px 30px;
+            text-align: right;
+            border-top: 1px solid #eee;
+        }
+        
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #b6915e;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: #fff;
+            padding: 70px 5% 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-col h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-col p, .footer-col a {
+            margin-bottom: 15px;
+            color: #ccc;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #ccc;
+            font-size: 14px;
+        }
+        
+        .reveal {
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+        
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3a3a3a;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 5%;
+            }
+            
+            .logo {
+                font-size: 22px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .category-btn {
+                font-size: 14px;
+                margin: 0 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">NOW <span>Furniture</span></a>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">홈</a></li>
+                <li><a href="#">제품</a></li>
+                <li><a href="#">소개</a></li>
+                <li><a href="#">매장안내</a></li>
+                <li><a href="#">문의</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>당신의 공간에 품격을 더하는</h1>
+            <h1>NOW Furniture</h1>
+            <p>최고급 소재와 장인정신으로 만든 프리미엄 가구 컬렉션을 만나보세요.<br>진정한 럭셔리를 경험하는 시작, NOW Furniture가 함께합니다.</p>
+            <a href="#categories" class="btn">컬렉션 보기</a>
+        </div>
+    </section>
+
+    <section id="categories" class="categories">
+        <div class="section-title reveal">
+            <h2>제품 카테고리</h2>
+        </div>
+        <div class="category-filter reveal">
+            <button class="category-btn active" data-category="all">전체보기</button>
+            <button class="category-btn" data-category="chair">의자</button>
+            <button class="category-btn" data-category="sofa">소파</button>
+            <button class="category-btn" data-category="table">테이블</button>
+            <button class="category-btn" data-category="bed">침대</button>
+        </div>
+        <div class="products reveal">
+            <!-- 의자 제품 -->
+            <div class="product" data-category="chair">
+                <div class="product-img" style="background-image: url('/api/placeholder/500/500')">
+                    <div class="product-brand">황금가구</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">모던 다이닝 체어</h3>
+                    <div class="product-price">₩ 210,000</div>
+                    <div class="product-stock">
+                        <i class="fas fa-check-circle stock-icon"></i>
+                        <span>재고: 15개 남음</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product" data-category="chair">
+                <div class="product-img" style="background-image: url('/api/placeholder/500/500')">
+                    <div class="product-brand">지수퍼니쳐</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">북유럽 원목 의자</h3>
+                    <div class="product-price">₩ 180,000</div>
+                    <div class="product-stock">
+                        <i class="fas fa-check-circle stock-icon"></i>
+                        <span>재고: 8개 남음</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product" data-category="chair">
+                <div class="product-img" style="background-image: url('/api/placeholder/500/500')">
+                    <div class="product-brand">하우스홈</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">프리미엄 가죽 체어</h3>
+                    <div class="product-price">₩ 350,000</div>
+                    <div class="product-stock">
+                        <i class="fas fa-check-circle stock-icon low-stock"></i>
+                        <span>재고: 3개 남음</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 소파 제품 -->
+            <div class="product" data-category="sofa">
+                <div class="product-img" style="background-image: url('/api/placeholder/500/500')">
+                    <div class="product-brand">클래식가구</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">3인용 패브릭 소파</h3>
+                    <div class="product-price">₩ 1,450,000</div>
+                    <div class="product-stock">
+                        <i class="fas fa-check-circle stock-icon"></i>
+                        <span>재고: 6개 남음</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product" data-category="sofa">
+                <div class="product-img" style="background-image: url('/api/placeholder/500/500')">
+                    <div class="product-brand">모던하우스</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">코너형 모듈 소파</h3>
+                    <div class="product-price">₩ 2,800,000</div>
+                    <div class="product-stock">
+                        <i class="fas fa-check-circle stock-icon"></i>
+                        <span>재고: 4개 남음</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 테이블 제품 -->
+            <div class="product" data-category="table">
+                <div class="product-img" style="background-image: url('/api/placeholder/500/500')">
+                    <div class="product-brand">아트퍼니처</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">원목 다이닝 테이블</h3>
+                    <div class="product-price">₩ 950,000</div>
+                    <div class="product-stock">
+                        <i class="fas fa-check-circle stock-icon"></i>
+                        <span>재고: 10개 남음</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product" data-category="table">
+                <div class="product-img" style="background-image: url('/api/placeholder/500/500')">
+                    <div class="product-brand">럭셔리홈</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">대리석 커피 테이블</h3>
+                    <div class="product-price">₩ 680,000</div>
+                    <div class="product-stock">
+                        <i class="fas fa-check-circle stock-icon low-stock"></i>
+                        <span>재고: 2개 남음</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 침대 제품 -->
+            <div class="product" data-category="bed">
+                <div class="product-img" style="background-image: url('/api/placeholder/500/500')">
+                    <div class="product-brand">로얄퍼니처</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">퀸 사이즈 침대 프레임</h3>
+                    <div class="product-price">₩ 1,250,000</div>
+                    <div class="product-stock">
+                        <i class="fas fa-check-circle stock-icon"></i>
+                        <span>재고: 7개 남음</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 의뢰서 작성 모달 -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>제품 의뢰서 작성</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label for="productName">제품명</label>
+                        <input type="text" id="productName" class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="productBrand">제조사</label>
+                        <input type="text" id="productBrand" class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">수량</label>
+                        <input type="number" id="quantity" class="form-control" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerName">이름</label>
+                        <input type="text" id="customerName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">연락처</label>
+                        <input type="tel" id="customerPhone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerEmail">이메일</label>
+                        <input type="email" id="customerEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="additionalInfo">추가 요청사항</label>
+                        <textarea id="additionalInfo" class="form-control" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" form="orderForm" class="submit-btn">의뢰서 제출</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>NOW Furniture</h3>
+                <p>프리미엄 가구 브랜드로서 최고의 품질과 디자인을 제공합니다. 당신의 공간에 특별함을 더하는 NOW Furniture와 함께하세요.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>고객센터</h3>
+                <p>월-금: 9AM - 6PM</p>
+                <p>토: 9AM - 1PM</p>
+                <p>일요일 및 공휴일 휴무</p>
+                <p>연락처: 02-1234-5678</p>
+                <p>이메일: info@nowfurniture.com</p>
+            </div>
+            <div class="footer-col">
+                <h3>바로가기</h3>
+                <a href="#">홈</a>
+                <a href="#">제품</a>
+                <a href="#">소개</a>
+                <a href="#">매장안내</a>
+                <a href="#">고객센터</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 NOW Furniture. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 페이지 로드 시 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            // 스크롤 애니메이션
+            window.addEventListener('scroll', reveal);
+            reveal();
+            
+            // 제품 필터링
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const products = document.querySelectorAll('.product');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 활성화 버튼 변경
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 제품 필터링
+                    const category = this.getAttribute('data-category');
+                    
+                    products.forEach(product => {
+                        if (category === 'all' || product.getAttribute('data-category') === category) {
+                            product.style.display = 'block';
+                        } else {
+                            product.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // 모달 관련 기능
+            const modal = document.getElementById('orderModal');
+            const productNameInput = document.getElementById('productName');
+            const productBrandInput = document.getElementById('productBrand');
+            const closeModal = document.querySelector('.close-modal');
+            
+            // 제품 클릭 시 모달 열기
+            products.forEach(product => {
+                product.addEventListener('click', function() {
+                    const productTitle = this.querySelector('.product-title').textContent;
+                    const productBrand = this.querySelector('.product-brand').textContent;
+                    productNameInput.value = productTitle;
+                    productBrandInput.value = productBrand;
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+                });
+            });
+            
+            // 모달 닫기
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // 스크롤 복원
+            });
+            
+            // 모달 외부 클릭 시 닫기
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // 폼 제출 처리
+            const orderForm = document.getElementById('orderForm');
+            orderForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // 실제로는 서버로 데이터를 전송하는 코드가 들어갈 자리
+                alert('의뢰서가 성공적으로 제출되었습니다. 곧 연락드리겠습니다.');
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                this.reset();
+                productNameInput.value = '';
+                productBrandInput.value = '';
+            });
+        });
+        
+        // 스크롤 애니메이션 함수
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const revealTop = reveals[i].getBoundingClientRect().top;
+                const revealPoint = 150;
+                
+                if (revealTop < windowHeight - revealPoint) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
